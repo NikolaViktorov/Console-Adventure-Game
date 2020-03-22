@@ -1,0 +1,45 @@
+[
+  {
+    "Health": 200,
+    "Power": 170,
+    "MoneyReward": 160,
+    "Type": "Mafioso"
+  },
+  {
+    "Health": 250,
+    "Power": 200,
+    "MoneyReward": 150,
+    "Type": "Dragon"
+  },
+  {
+    "Health": 100,
+    "Power": 80,
+    "MoneyReward": 100,
+    "Type": "Robber"
+  },
+  {
+    "Health": 130,
+    "Power": 200,
+    "MoneyReward": 200,
+    "Type": "Ninja"
+  },
+  {
+    "Health": 120,
+    "Power": 95,
+    "MoneyReward": 100,
+    "Type": "Zombie"
+  },
+  {
+    "Health": 160,
+    "Power": 150,
+    "MoneyReward": 120,
+    "Type": "Vampire"
+  },
+  {
+    "Health": 70,
+    "Power": 150,
+    "MoneyReward": 60,
+    "Type": "Witch"
+  }
+
+]

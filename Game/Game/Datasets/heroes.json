@@ -1,0 +1,51 @@
+[
+  {
+    "Health": 100,
+    "Power": 120,
+    "Experience": 0,
+    "Money": 210,
+    "Type": "Knight"
+  },
+  {
+    "Health": 100,
+    "Power": 100,
+    "Experience": 0,
+    "Money": 200,
+    "Type": "Mage"
+  },
+  {
+    "Health": 100,
+    "Power": 150,
+    "Experience": 0,
+    "Money": 100,
+    "Type": "Dwarf"
+  },
+  {
+    "Health": 100,
+    "Power": 110,
+    "Experience": 0,
+    "Money": 250,
+    "Type": "Princess"
+  },
+  {
+    "Health": 100,
+    "Power": 120,
+    "Experience": 0,
+    "Money": 130,
+    "Type": "Villager"
+  },
+  {
+    "Health": 100,
+    "Power": 200,
+    "Experience": 0,
+    "Money": 250,
+    "Type": "Turtle"
+  },
+  {
+    "Health": 100,
+    "Power": 130,
+    "Experience": 0,
+    "Money": 100,
+    "Type": "God"
+  }
+]
