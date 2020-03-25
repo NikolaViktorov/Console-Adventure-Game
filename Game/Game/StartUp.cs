@@ -12,9 +12,6 @@ namespace Game
 {
     public class StartUp
     {
-        // TODO -> MAYBE MAKE MANY TO MANY TABLE FOR HERO - ITEMS
-        // or just remove the reqirements of the item so it does
-        // not require hero and enemy id on creation.
         public static void Main(string[] args)
         {
             using var context = new GameContext();

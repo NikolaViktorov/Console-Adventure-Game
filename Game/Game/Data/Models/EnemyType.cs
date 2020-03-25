@@ -8,12 +8,14 @@ namespace Game.Data.Models
 {
     public enum EnemyType
     {
-        Mafioso = 0,
-        Dragon = 1,
-        Robber = 2,
-        Ninja = 3,
-        Zombie = 4,
-        Vampire = 5,
-        Witch = 6
+        ItemHolder = 0,
+        Mafioso = 1,
+        Dragon = 2,
+        Robber = 3,
+        Ninja = 4,
+        Zombie = 5,
+        Vampire = 6,
+        Witch = 7
+        
     }
 }

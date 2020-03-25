@@ -8,12 +8,13 @@ namespace Game.Data.Models
 {
     public enum HeroType
     { 
-        Knight = 0,
-        Mage = 1,
-        Dwarf = 2,
-        Princess = 3,
-        Villager = 4,
-        Turtle = 5,
-        God = 6
+        ItemHolder = 0,
+        Knight = 1,
+        Mage = 2,
+        Dwarf = 3,
+        Princess = 4,
+        Villager = 5,
+        Turtle = 6,
+        God = 7
     }
 }

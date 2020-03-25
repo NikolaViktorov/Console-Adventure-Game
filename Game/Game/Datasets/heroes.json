@@ -1,5 +1,12 @@
 [
   {
+    "Health": 1,
+    "Power": 1,
+    "Experience": 0,
+    "Money": 0,
+    "Type": "ItemHolder"
+  },
+  {
     "Health": 100,
     "Power": 120,
     "Experience": 0,

@@ -40,6 +40,12 @@
     "Power": 150,
     "MoneyReward": 60,
     "Type": "Witch"
+  },
+  {
+    "Health": 1,
+    "Power": 1,
+    "MoneyReward": 1,
+    "Type": "ItemHolder"
   }
 
 ]
