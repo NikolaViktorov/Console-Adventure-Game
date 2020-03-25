@@ -1,50 +1,58 @@
 [
   {
     "Health": 200,
-    "Power": 170,
+    "LevelId": 1,
     "MoneyReward": 160,
+    "Power": 170,
     "Type": "Mafioso"
   },
   {
     "Health": 250,
     "Power": 200,
     "MoneyReward": 150,
-    "Type": "Dragon"
+    "Type": "Dragon",
+    "LevelId": 1
   },
   {
     "Health": 100,
     "Power": 80,
     "MoneyReward": 100,
-    "Type": "Robber"
+    "Type": "Robber",
+    "LevelId": 1
   },
   {
     "Health": 130,
     "Power": 200,
     "MoneyReward": 200,
-    "Type": "Ninja"
+    "Type": "Ninja",
+    "LevelId": 1
   },
   {
     "Health": 120,
     "Power": 95,
     "MoneyReward": 100,
-    "Type": "Zombie"
+    "Type": "Zombie",
+    "LevelId": 1
   },
   {
     "Health": 160,
     "Power": 150,
     "MoneyReward": 120,
-    "Type": "Vampire"
+    "Type": "Vampire",
+    "LevelId": 1
   },
   {
     "Health": 70,
     "Power": 150,
     "MoneyReward": 60,
-    "Type": "Witch"
+    "Type": "Witch",
+    "LevelId": 1
   },
   {
     "Health": 1,
-    "Power": 1,
+    "LevelId": 1,
     "MoneyReward": 1,
+    "Power": 1,
     "Type": "ItemHolder"
   }
 

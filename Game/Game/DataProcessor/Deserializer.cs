@@ -2,6 +2,7 @@
 using Game.Data;
 using Game.Data.Models;
 using Game.DataProcessor.ImportDTO;
+using Game.Game_Engine;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace Game.DataProcessor
             = "Successfully imported enemy with health {0}, power {1}, money reward {2} and type {3}!";
         private const string SuccessfulImportItem
             = "Successfully imported item with name {0}, upgrade value {1} and type {2}!";
+        private const string SuccessfulImportLevel
+           = "Successfully imported level with name {0}!";
+        private const string SuccessfulImportAdventurer
+          = "Successfully imported adventurer with type {0}!";
 
         public static string ImportHeroes(GameContext context, string jsonString)
         {
@@ -47,7 +52,71 @@ namespace Game.DataProcessor
                 sb.AppendLine(string.Format(SuccessfulImportHero, hero.Health, hero.Power, hero.Experience, hero.Money, hero.Type));
             }
 
+            Engine.heroes = heroes;
             context.Heros.AddRange(heroes);
+            context.SaveChanges();
+
+            var result = sb.ToString();
+
+            return result;
+        }
+
+        public static string ImportLevels(GameContext context, string jsonString)
+        {
+            var levelDtos = JsonConvert.DeserializeObject<LevelDTO[]>(jsonString);
+
+            var levels = new List<Level>();
+            var sb = new StringBuilder();
+
+            foreach (var levelDto in levelDtos)
+            {
+                var isValidDto = IsValid(levelDto);
+
+                if (!isValidDto)
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var level = Mapper.Map<Level>(levelDto);
+
+                levels.Add(level);
+
+                sb.AppendLine(string.Format(SuccessfulImportLevel, level.Name));
+            }
+
+            context.Levels.AddRange(levels);
+            context.SaveChanges();
+
+            var result = sb.ToString();
+
+            return result;
+        }
+        public static string ImportAdventurers(GameContext context, string jsonString)
+        {
+            var adventurerDtos = JsonConvert.DeserializeObject<AdventurerDTO[]>(jsonString);
+
+            var adventurers = new List<Adventurer>();
+            var sb = new StringBuilder();
+
+            foreach (var adventurerDto in adventurerDtos)
+            {
+                var isValidDto = IsValid(adventurerDto);
+
+                if (!isValidDto)
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var adventurer = Mapper.Map<Adventurer>(adventurerDto);
+
+                adventurers.Add(adventurer);
+
+                sb.AppendLine(string.Format(SuccessfulImportAdventurer, adventurer.Type));
+            }
+
+            context.Adventurers.AddRange(adventurers);
             context.SaveChanges();
 
             var result = sb.ToString();

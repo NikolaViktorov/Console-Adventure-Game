@@ -13,9 +13,11 @@ namespace Game
     {
         public GameProfile()
         {
+            this.CreateMap<LevelDTO, Level>();
             this.CreateMap<HeroDTO, Hero>();
             this.CreateMap<EnemyDTO, Enemy>();
             this.CreateMap<ItemDTO, Item>();
+            this.CreateMap<AdventurerDTO, Adventurer>();
         }
     }
 }

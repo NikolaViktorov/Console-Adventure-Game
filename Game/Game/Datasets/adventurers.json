@@ -1,0 +1,31 @@
+[
+  {
+    "Type": "Elf",
+    "LevelId": 1
+  },
+  {
+    "Type": "Unicorn",
+    "LevelId": 1
+  },
+  {
+    "LevelId": 1,
+    "Type": "Merchant"
+  },
+  {
+    "Type": "Doctor",
+    "LevelId": 1
+  },
+  {
+    "Type": "Ghost",
+    "LevelId": 1
+  },
+  {
+    "Type": "WiseMan",
+    "LevelId": 1
+  },
+  {
+    "Type": "Gnome",
+    "LevelId": 1
+  }
+]
+

@@ -28,5 +28,11 @@ namespace Game.Data.Models
         public HeroType Type { get; set; }
 
         public ICollection<Item> Items { get; set; }
+
+        public override string ToString()
+        {
+            string result = $"{this.Type} with {Health} HP, {Power} DMG and {Money} Gold!";
+            return result;
+        }
     }
 }

@@ -30,5 +30,9 @@ namespace Game.Data.Models
 
         [Required]
         public EnemyType Type { get; set; }
+
+        public int LevelId { get; set; }
+
+        public Level Level { get; set; }
     }
 }

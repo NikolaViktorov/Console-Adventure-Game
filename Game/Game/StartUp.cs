@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Game.Data;
 using Game.Data.Models;
+using Game.Game_Engine;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,8 @@ namespace Game
             var projectDir = GetProjectDirectory();
 
             ImportEntities(context, projectDir + @"Datasets/", projectDir + @"ImportResults/");
+
+            var engine = new Engine();
         }
 
         private static void ResetDatabase(GameContext context, bool shouldDropDatabase = false)
@@ -45,10 +48,20 @@ namespace Game
                     File.ReadAllText(baseDir + "heroes.json"));
             PrintEntity(heroes);
 
+            var levels =
+                DataProcessor.Deserializer.ImportLevels(context,
+                    File.ReadAllText(baseDir + "levels.json"));
+            PrintEntity(levels);
+
             var enemies =
                DataProcessor.Deserializer.ImportEnemies(context,
                    File.ReadAllText(baseDir + "enemies.json"));
             PrintEntity(enemies);
+
+            var adventurers =
+               DataProcessor.Deserializer.ImportAdventurers(context,
+                   File.ReadAllText(baseDir + "adventurers.json"));
+            PrintEntity(adventurers);
 
             var items =
               DataProcessor.Deserializer.ImportItems(context,

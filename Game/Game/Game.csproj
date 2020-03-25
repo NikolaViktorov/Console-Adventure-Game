@@ -152,10 +152,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataProcessor\Deserializer.cs" />
+    <Compile Include="DataProcessor\ImportDTO\AdventurerDTO.cs" />
     <Compile Include="DataProcessor\ImportDTO\EnemyDTO.cs" />
     <Compile Include="DataProcessor\ImportDTO\ItemDTO.cs" />
+    <Compile Include="DataProcessor\ImportDTO\LevelDTO.cs" />
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Data\GameContext.cs" />
+    <Compile Include="Data\Models\Adventurer.cs" />
+    <Compile Include="Data\Models\AdventurerType.cs" />
     <Compile Include="Data\Models\Enemy.cs" />
     <Compile Include="Data\Models\EnemyType.cs" />
     <Compile Include="Data\Models\Hero.cs" />
@@ -163,15 +167,19 @@
     <Compile Include="Data\Models\Item.cs" />
     <Compile Include="Data\Models\ItemType.cs" />
     <Compile Include="DataProcessor\ImportDTO\HeroDTO.cs" />
+    <Compile Include="Data\Models\Level.cs" />
+    <Compile Include="Game Engine\Engine.cs" />
     <Compile Include="GameProfile.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Datasets\adventurers.json" />
     <None Include="Datasets\heroes.json" />
     <None Include="Datasets\enemies.json" />
     <None Include="Datasets\items.json" />
+    <None Include="Datasets\levels.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

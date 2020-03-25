@@ -21,6 +21,10 @@ namespace Game.Data
 
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Level> Levels { get; set; }
+
+        public DbSet<Adventurer> Adventurers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

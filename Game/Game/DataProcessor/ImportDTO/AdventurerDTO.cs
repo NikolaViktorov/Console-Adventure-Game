@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Game.DataProcessor.ImportDTO
 {
-    public class EnemyDTO
+    public class AdventurerDTO
     {
-        public int Health { get; set; }
-        public int Power { get; set; }
-        public int MoneyReward { get; set; }
         public string Type { get; set; }
 
         public int LevelId { get; set; }
