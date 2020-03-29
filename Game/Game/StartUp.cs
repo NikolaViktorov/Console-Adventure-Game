@@ -17,6 +17,8 @@ namespace Game
         {
             using var context = new GameContext();
            
+            
+
             Mapper.Initialize(config => config.AddProfile<GameProfile>());
 
             ResetDatabase(context, shouldDropDatabase: true);

@@ -36,9 +36,6 @@ namespace Game.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-
             //modelBuilder.Entity<Hero>(entity =>
             //{
             //    entity.HasKey(h => h.HeroId);

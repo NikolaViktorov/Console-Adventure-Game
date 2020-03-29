@@ -8,6 +8,6 @@ namespace Game.Data
 {
     static class Configuration
     {
-        internal static string ConnectionString = @"Server=DESKTOP-CG28V8E;Database=GameDatabase;Integrated Security=true;";
+        internal static string ConnectionString = @"Server=.;Database=GameDatabase;Integrated Security=true;";
     }
 }
