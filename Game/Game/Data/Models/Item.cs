@@ -28,5 +28,10 @@ namespace Game.Data.Models
 
         [Required]
         public ItemType Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}: {Type} | {UpgradeValue}";
+        }
     }
 }

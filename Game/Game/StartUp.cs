@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game.GameController;
 
 namespace Game
 {
@@ -27,7 +28,7 @@ namespace Game
 
             ImportEntities(context, projectDir + @"Datasets/", projectDir + @"ImportResults/");
 
-            var engine = new Engine();
+            var controller = new Controller();
         }
 
         private static void ResetDatabase(GameContext context, bool shouldDropDatabase = false)

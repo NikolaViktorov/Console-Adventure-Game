@@ -17,5 +17,10 @@ namespace Game.Data.Models
         public Level Level { get; set; }
 
         public int LevelId { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Type}";
+        }
     }
 }

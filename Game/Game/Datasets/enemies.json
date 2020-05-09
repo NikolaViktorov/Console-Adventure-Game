@@ -3,47 +3,47 @@
     "Health": 200,
     "LevelId": 1,
     "MoneyReward": 160,
-    "Power": 170,
+    "Power": 18,
     "Type": "Mafioso"
   },
   {
     "Health": 250,
-    "Power": 200,
+    "Power": 40,
     "MoneyReward": 150,
     "Type": "Dragon",
     "LevelId": 1
   },
   {
     "Health": 100,
-    "Power": 80,
+    "Power": 10,
     "MoneyReward": 100,
     "Type": "Robber",
     "LevelId": 1
   },
   {
     "Health": 130,
-    "Power": 200,
+    "Power": 25,
     "MoneyReward": 200,
     "Type": "Ninja",
     "LevelId": 1
   },
   {
     "Health": 120,
-    "Power": 95,
+    "Power": 15,
     "MoneyReward": 100,
     "Type": "Zombie",
     "LevelId": 1
   },
   {
     "Health": 160,
-    "Power": 150,
+    "Power": 40,
     "MoneyReward": 120,
     "Type": "Vampire",
     "LevelId": 1
   },
   {
     "Health": 70,
-    "Power": 150,
+    "Power": 25,
     "MoneyReward": 60,
     "Type": "Witch",
     "LevelId": 1
@@ -57,3 +57,52 @@
   }
 
 ]
+ //{
+ //   "Health": 200,
+ //   "LevelId": 1,
+ //   "MoneyReward": 160,
+ //   "Power": 170,
+ //   "Type": "Mafioso"
+ // },
+ // {
+ //   "Health": 250,
+ //   "Power": 200,
+ //   "MoneyReward": 150,
+ //   "Type": "Dragon",
+ //   "LevelId": 1
+ // },
+ // {
+ //   "Health": 100,
+ //   "Power": 80,
+ //   "MoneyReward": 100,
+ //   "Type": "Robber",
+ //   "LevelId": 1
+ // },
+ // {
+ //   "Health": 130,
+ //   "Power": 200,
+ //   "MoneyReward": 200,
+ //   "Type": "Ninja",
+ //   "LevelId": 1
+ // },
+ // {
+ //   "Health": 120,
+ //   "Power": 95,
+ //   "MoneyReward": 100,
+ //   "Type": "Zombie",
+ //   "LevelId": 1
+ // },
+ // {
+ //   "Health": 160,
+ //   "Power": 150,
+ //   "MoneyReward": 120,
+ //   "Type": "Vampire",
+ //   "LevelId": 1
+ // },
+ // {
+ //   "Health": 70,
+ //   "Power": 150,
+ //   "MoneyReward": 60,
+ //   "Type": "Witch",
+ //   "LevelId": 1
+ // },

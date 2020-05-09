@@ -10,15 +10,30 @@ namespace Game.Data.Models
     {
         public Level()
         {
-            this.Enemies = new HashSet<Enemy>();
+            this.Enemies = new List<Enemy>();
             this.Adventurers = new HashSet<Adventurer>();
         }
         public int LevelId { get; set; }
 
         public string Name { get; set; }
         
-        public ICollection<Enemy> Enemies { get; set; }
+        public List<Enemy> Enemies { get; set; }
 
-        public ICollection<Adventurer> Adventurers { get; set; } 
+        public ICollection<Adventurer> Adventurers { get; set; }
+
+        public override string ToString()
+        {
+            int i = 1;
+            string result = Name + Environment.NewLine;
+            foreach (var enemy in Enemies)
+            {
+                result += "   " + enemy + $" --> {i++}" + Environment.NewLine;
+            }
+            foreach (var adv in Adventurers)
+            {
+                result += "   " + adv + $" --> {i++}" + Environment.NewLine;
+            }
+            return result;
+        }
     }
 }

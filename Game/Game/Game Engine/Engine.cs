@@ -1,4 +1,6 @@
-﻿using Game.Data.Models;
+﻿using Game.Data;
+using Game.Data.CustomNames;
+using Game.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,49 +11,146 @@ namespace Game.Game_Engine
 {
     public class Engine
     {
-        public static List<Hero> heroes { get; set; }
+        private Random random = new Random();
+        public Hero Hero { get; set; }
 
-        public Engine(/*picked hero*/)
+        public Enemy Enemy { get; set; }
+        public List<Level> Levels { get; set; }
+
+        DatabaseConnector db = new DatabaseConnector();
+
+        private int currLevelIndex;
+
+        public Engine()
         {
-            Play();
+            Levels = new List<Level>();
         }
-        public void Play()
+        public Level MakeLevel()
         {
-            Hero hero = PickHero();
-            Console.WriteLine(hero);
+            Level level = new Level();
+            level.Enemies = PickFourRandomEnemies();
+            level.Adventurers = PickRandomAdventurers(1); // TODO add random maybe to enemies (3-5) 
+                                                          // so there can be 2 - 1 - 0 adventurers
+            level.Name = LevelNames.GetRandomLevelName();
+            return level;
         }
 
-        private Hero PickHero()
+        private List<Adventurer> PickRandomAdventurers(int count)
         {
-            List<string> names = new List<string>();
-            bool picked = false;
-            Console.WriteLine("Pick a hero from these down below:");
-            foreach (var hero in heroes)
+            using var context = new GameContext();
+            List<Adventurer> allAdventureres = context.Adventurers.ToList();
+            List<Adventurer> RandomAdventureres = new List<Adventurer>();
+            int endIndex = allAdventureres.Count;
+
+            int randomIndex = random.Next(1, endIndex);
+            for (int i = 0; i < count; i++)
             {
-                if (hero.Type.ToString() == "ItemHolder")
-                {
-                    continue;
-                }
-                Console.WriteLine(hero);
-                names.Add(hero.Type.ToString());
-            }
-            Console.WriteLine("Type his name to select him!");
-            string name = Console.ReadLine();
-            while (picked == false)
-            {
-                if (!names.Contains(name))
-                {
-                    name = Console.ReadLine();
-                }
-                else
-                {
-                    picked = true;
-                }
+                RandomAdventureres.Add(allAdventureres[randomIndex]);
+                randomIndex = random.Next(1, endIndex);
             }
 
-            Hero pickedHero = heroes.FirstOrDefault(h => h.Type.ToString() == name);
-
-            return pickedHero;
+            return RandomAdventureres;
         }
+
+        internal Enemy PickEnemy(int action)
+        {
+            Enemy enemy = db.GetEnemyWithIndexInLevel(currLevelIndex, action);
+            this.Enemy = enemy;
+            return enemy;
+        }
+
+        internal Adventurer PickAdventurer()
+        {
+            Adventurer adventurer = db.GetAdventurerInLevel(currLevelIndex);
+            return adventurer;
+        }
+
+        internal string PlayActionEnemy(string action)
+        {
+            switch (action)
+            {
+                case "Attack":
+                    return Hero.AttackEnemy(Enemy);
+                case "Flee":
+                    return ";";
+             }
+            return "";
+        }
+
+        internal void EnemyKilled(int enemyIndex)
+        {
+            enemyIndex -= 1;
+            this.Hero.Money += this.Enemy.MoneyReward;
+            Levels[0].Enemies.RemoveAt(enemyIndex);
+        }
+
+        internal Level LoadLevel(int levelIndex)
+        {
+            Level level = Levels[levelIndex];
+            currLevelIndex = levelIndex + 2; // if its level 0 in database its level 2 because lvl 1 is itemholder
+
+            return level;
+        }
+
+        internal void AddLevelToDB(Level level)
+        {
+            using var db = new GameContext();
+
+            db.Levels.Add(new Level() { Name = level.Name });
+            db.SaveChanges();
+            int levelId = db.Levels.ToList().Last().LevelId;
+
+
+            var enemies = new List<Enemy>();
+            var adventurers = new List<Adventurer>();
+            foreach (var enemy in level.Enemies)
+            {
+                enemies.Add(new Enemy()
+                {
+                    Type = enemy.Type,
+                    Health = enemy.Health,
+                    Power = enemy.Power,
+                    MoneyReward = enemy.MoneyReward,
+                    LevelId = levelId
+                });
+            }
+            foreach (var adventurer in level.Adventurers)
+            {
+                adventurers.Add(new Adventurer()
+                {
+                    Type = adventurer.Type,
+                    LevelId = levelId
+                });
+            }
+            db.Enemies.AddRange(enemies);
+            db.Adventurers.AddRange(adventurers);
+            db.SaveChanges();
+        }
+
+        private List<Enemy> PickFourRandomEnemies()
+        {
+            using var context = new GameContext();
+            List<Enemy> allEnemies = context.Enemies.ToList();
+            List<Enemy> fourRandomEnemies = new List<Enemy>();
+            int endIndex = allEnemies.Count;
+
+            
+            for (int i = 0; i < 4; i++)
+            {
+                int randomIndex = random.Next(1, endIndex);
+                Enemy enemy = allEnemies[randomIndex];
+                //enemy.Items.Add(new Item()
+                //{
+                //    Name = "l",
+                //    Type = ItemType.Health,
+                //    UpgradeValue = 100
+                //});
+                fourRandomEnemies.Add(enemy);
+            }
+
+            return fourRandomEnemies;
+        }
+
+        
     }
 }

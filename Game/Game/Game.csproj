@@ -151,6 +151,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CustomNames\LevelNames.cs" />
+    <Compile Include="Displays\ConsoleDisplay.cs" />
+    <Compile Include="Game Engine\DatabaseConnector.cs" />
+    <Compile Include="GameController\Controller.cs" />
     <Compile Include="DataProcessor\Deserializer.cs" />
     <Compile Include="DataProcessor\ImportDTO\AdventurerDTO.cs" />
     <Compile Include="DataProcessor\ImportDTO\EnemyDTO.cs" />

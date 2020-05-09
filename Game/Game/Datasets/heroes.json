@@ -7,52 +7,102 @@
     "Type": "ItemHolder"
   },
   {
-    "Health": 100,
-    "Power": 120,
+    "Health": 120,
+    "Power": 25,
     "Experience": 0,
     "Money": 210,
     "Type": "Knight"
   },
   {
-    "Health": 100,
-    "Power": 100,
+    "Health": 80,
+    "Power": 45,
     "Experience": 0,
     "Money": 200,
     "Type": "Mage"
   },
   {
-    "Health": 100,
-    "Power": 150,
+    "Health": 140,
+    "Power": 35,
     "Experience": 0,
     "Money": 100,
     "Type": "Dwarf"
   },
   {
-    "Health": 100,
-    "Power": 110,
+    "Health": 90,
+    "Power": 30,
     "Experience": 0,
     "Money": 250,
     "Type": "Princess"
   },
   {
-    "Health": 100,
-    "Power": 120,
+    "Health": 150,
+    "Power": 20,
     "Experience": 0,
     "Money": 130,
     "Type": "Villager"
   },
   {
-    "Health": 100,
-    "Power": 200,
+    "Health": 130,
+    "Power": 25,
     "Experience": 0,
     "Money": 250,
     "Type": "Turtle"
   },
   {
-    "Health": 100,
-    "Power": 130,
+    "Health": 120,
+    "Power": 30,
     "Experience": 0,
     "Money": 100,
     "Type": "God"
   }
 ]
+
+//{
+//    "Health": 100,
+//    "Power": 120,
+//    "Experience": 0,
+//    "Money": 210,
+//    "Type": "Knight"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 100,
+//    "Experience": 0,
+//    "Money": 200,
+//    "Type": "Mage"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 150,
+//    "Experience": 0,
+//    "Money": 100,
+//    "Type": "Dwarf"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 110,
+//    "Experience": 0,
+//    "Money": 250,
+//    "Type": "Princess"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 120,
+//    "Experience": 0,
+//    "Money": 130,
+//    "Type": "Villager"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 200,
+//    "Experience": 0,
+//    "Money": 250,
+//    "Type": "Turtle"
+//  },
+//  {
+//    "Health": 100,
+//    "Power": 130,
+//    "Experience": 0,
+//    "Money": 100,
+//    "Type": "God"
+//  }

@@ -2,7 +2,9 @@
 using Game.Data;
 using Game.Data.Models;
 using Game.DataProcessor.ImportDTO;
+using Game.Displays;
 using Game.Game_Engine;
+using Game.GameController;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -52,7 +54,7 @@ namespace Game.DataProcessor
                 sb.AppendLine(string.Format(SuccessfulImportHero, hero.Health, hero.Power, hero.Experience, hero.Money, hero.Type));
             }
 
-            Engine.heroes = heroes;
+            ConsoleDisplay.heroes = heroes;
             context.Heros.AddRange(heroes);
             context.SaveChanges();
 

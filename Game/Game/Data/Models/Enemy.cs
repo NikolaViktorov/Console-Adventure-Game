@@ -34,5 +34,20 @@ namespace Game.Data.Models
         public int LevelId { get; set; }
 
         public Level Level { get; set; }
+
+        public override string ToString()
+        {
+            string result = $"{Type}: {Power} power | {Health} health";
+            if (Items.Count > 0)
+            {
+                result += Environment.NewLine;
+                foreach (var item in Items)
+                {
+                    result += "      " + item + Environment.NewLine;
+                }
+            }
+            
+            return result;
+        }
     }
 }

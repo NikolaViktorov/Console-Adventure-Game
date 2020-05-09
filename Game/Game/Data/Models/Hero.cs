@@ -29,6 +29,23 @@ namespace Game.Data.Models
 
         public ICollection<Item> Items { get; set; }
 
+        public string AttackEnemy(Enemy enemy)
+        {
+            if (enemy.Health - this.Power <= 0)
+            {
+                enemy.Health = 0;
+                return "Enemy died";
+            }
+            if (this.Health - enemy.Power <= 0)
+            {
+                this.Health = 0;
+                return "Hero died";
+            }
+            enemy.Health -= this.Power;
+            this.Health -= enemy.Power;
+            return "Fought";
+        }
+
         public override string ToString()
         {
             string result = $"{this.Type} with {Health} HP, {Power} DMG and {Money} Gold!";
