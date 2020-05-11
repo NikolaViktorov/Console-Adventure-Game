@@ -50,7 +50,7 @@ namespace Game.Displays
         internal string PickActionEnemy(Enemy enemy)
         {
             Console.WriteLine($"You met {enemy}!");
-            Console.WriteLine("Pick what you want to do!");
+            Console.WriteLine("Pick what you want to do! (Attack | Flee)");
             Console.WriteLine("1. Flee");
             Console.WriteLine("2. Attack");
             // bribe TODO
@@ -64,16 +64,67 @@ namespace Game.Displays
             return action;
         }
 
-        internal string PickActionAdventurer(Adventurer adv)
+        internal bool PickActionAdventurer(Adventurer adv)
         {
             Console.WriteLine($"You met {adv.Type}!");
-            // diff adv types
+            bool deal = false;
+            string answer = "";
 
-            string action = "";
+            switch (adv.Type)
+            {
+                case AdventurerType.Elf:
+                    Console.WriteLine("The elf is a mythic creature, which has the power to double your power for the price of 100 Gold! Will you accept this great deal?");
+                    answer = Console.ReadLine();
+                    break;
+                case AdventurerType.Unicorn:
+                    Console.WriteLine("The unicorn is the friendliest creature you can find in this game! It will charge you nothing and will give you 40 HP. Will you accept this great deal?");
+                    answer = Console.ReadLine();
+                    break;
+                case AdventurerType.Merchant:
+                    Console.WriteLine("The merchant is a very clever and insidious person. He will trade you some items for a price. Here are the items you can choose from: "); // TODO ADD ITEMS
+                    answer = Console.ReadLine();
+                    break;
+                case AdventurerType.Doctor:
+                    Console.WriteLine("The doctor is ready to make you stronger by healing you by 50HP and giving you 20 power but for the cost of 5 % of your total gold. Will you accept this great deal?");
+                    answer = Console.ReadLine();
+                    break;
+                case AdventurerType.Ghost:
+                    Console.WriteLine(); // TODO
+                    answer = Console.ReadLine();
+                    break;
+                case AdventurerType.WiseMan:
+                    Console.WriteLine(); // TODO
+                    answer = Console.ReadLine(); 
+                    break;
+                case AdventurerType.Gnome:
+                    Console.WriteLine(); // TODO
+                    answer = Console.ReadLine();
+                    break;
+                default:
+                    break;
+            }
 
-            return action;
+            deal = CheckAnswer(answer);
+
+            return deal;
+        }
+        
+        private bool CheckAnswer(string answer)
+        {
+            if (answer == "Deal")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }        
         }
 
+        internal void ShowHeroStat(Hero hero)
+        {
+            Console.WriteLine("Your hero stats are: " + hero);
+        }
 
         internal void DisplayLevel(Level level)
         {
@@ -93,15 +144,24 @@ namespace Game.Displays
             Console.WriteLine(hero);
         }
 
-        public int PickCreature()
+        public int PickCreature(bool failed)
         {
-            Console.WriteLine("Where do you want to go? (pick a number between [1-5])");
-            int numberPicked = int.Parse(Console.ReadLine());
+            int numberPicked = 0;
+            if (failed)
+            {
+                Console.WriteLine("Please pick a number that exists in the current level!");
+                numberPicked = int.Parse(Console.ReadLine());
+                return numberPicked;
+            }
+
+            Console.WriteLine("Where do you want to go? (pick a number )");
+                numberPicked = int.Parse(Console.ReadLine());
             while (numberPicked < 1 || numberPicked > 5)
             {
                 Console.WriteLine("You entered a wrong move! Please, enter a number between 1 and 5");
                 numberPicked = int.Parse(Console.ReadLine());
             }
+            
             return numberPicked;
         }
     }

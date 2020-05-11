@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Data;
+using System.Data;
 
 namespace Game.Game_Engine
 {
@@ -32,6 +33,26 @@ namespace Game.Game_Engine
                     .Where(a => a.LevelId == currLevelIndex)
                     .FirstOrDefault();
             return adventurer;
+        }
+
+        internal void UpdateEnemy(Enemy enemy)
+        {
+            using var db = new GameContext();
+
+            var result = db.Enemies.SingleOrDefault(e => e.EnemyId == enemy.EnemyId);
+            if (result != null)
+            {
+                result.Health = enemy.Health;
+                db.SaveChanges();
+            }
+        }
+
+        internal void DeleteEnemy(Enemy enemy)
+        {
+            using var db = new GameContext();
+
+            db.Enemies.Remove(enemy);
+            db.SaveChanges();           
         }
     }
 }

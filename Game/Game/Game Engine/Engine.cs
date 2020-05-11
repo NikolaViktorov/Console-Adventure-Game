@@ -77,11 +77,52 @@ namespace Game.Game_Engine
             return "";
         }
 
+        internal void PlayActionAdventurer(Adventurer adv, bool deal)
+        {
+            if (deal)
+            {
+                switch (adv.Type)
+                {
+                    case AdventurerType.Elf:
+                        if (Hero.Money < 100)
+                        {
+                            Console.WriteLine("You do not have enough money, maybe try killing some enemies firsst!");
+                        }
+                        else
+                        {
+                            Hero.Money -= 100;
+                            Hero.Power *= 2;
+                        }
+                        break;
+                    case AdventurerType.Unicorn:
+                        Hero.Health += 40;
+                        break;
+                    case AdventurerType.Merchant:
+                        break;
+                    case AdventurerType.Doctor:
+                        int neededMoney = Hero.Money * 5 / 100;
+                        Hero.Money -= neededMoney;
+                        Hero.Health += 50;
+                        Hero.Power += 20;
+                        break;
+                    case AdventurerType.Ghost:
+                        break;
+                    case AdventurerType.WiseMan:
+                        break;
+                    case AdventurerType.Gnome:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         internal void EnemyKilled(int enemyIndex)
         {
             enemyIndex -= 1;
             this.Hero.Money += this.Enemy.MoneyReward;
             Levels[0].Enemies.RemoveAt(enemyIndex);
+            db.DeleteEnemy(this.Enemy);
         }
 
         internal Level LoadLevel(int levelIndex)

@@ -19,6 +19,8 @@ namespace Game.GameController
 
         public ConsoleDisplay Display { get; set; }
 
+        DatabaseConnector db = new DatabaseConnector();
+
         public Controller()
         {
             Engine = new Engine();
@@ -38,52 +40,75 @@ namespace Game.GameController
                 Engine.AddLevelToDB(newLevel);
             }
             Level level = Engine.LoadLevel(0);
-            Display.DisplayLevel(level);
             #endregion  
             // Levels
 
             #region
-            int creatureIndex = Display.PickCreature();
-            Enemy enemy = new Enemy();
-            Adventurer adventurer = new Adventurer();
-            bool enemyOrAdventurer = false; // FALSE = Eneme, TRUE = Adventurer
-            if (creatureIndex <= 4)
+            while (true) // TODO ADD NEXT LEVEL
             {
-                enemy = Engine.PickEnemy(creatureIndex);
-                enemyOrAdventurer = false;
-            }
-            else
-            {
-                adventurer = Engine.PickAdventurer();
-                enemyOrAdventurer = true;
-            }
-            #endregion
-            // Creature
-            #region
-            string action = "";
-            if (enemyOrAdventurer) // adv == true | enemy = false
-            {
-                action = Display.PickActionAdventurer(adventurer);
-                //Engine.PlayActionAdventurer(action);
-            }
-            else
-            {
-                action = Display.PickActionEnemy(enemy);
-                string result = Engine.PlayActionEnemy(action);
-                switch (result)
+                Display.DisplayLevel(level);
+
+                int creatureIndex = Display.PickCreature(false);
+                while (creatureIndex > level.Enemies.Count + level.Adventurers.Count || creatureIndex < 0 )
                 {
-                    case "Enemy died":
+                    creatureIndex = Display.PickCreature(true);
+                }
+                Enemy enemy = new Enemy();
+                Adventurer adventurer = new Adventurer();
+                bool enemyOrAdventurer = false; // FALSE = Eneme, TRUE = Adventurer
+                if (creatureIndex <= level.Enemies.Count)
+                {
+                    enemy = Engine.PickEnemy(creatureIndex);
+                    enemyOrAdventurer = false;
+                }
+                else
+                {
+                    adventurer = Engine.PickAdventurer();
+                    enemyOrAdventurer = true;
+                }
+                #endregion
+                // Creature
+                #region
+                
+                if (enemyOrAdventurer) // adv == true | enemy = false
+                {
+                    bool deal = Display.PickActionAdventurer(adventurer);
+                    Engine.PlayActionAdventurer(adventurer, deal);
+                }
+                else
+                {
+                    string action = "";
+                    Display.ShowHeroStat(Engine.Hero);
+                    action = Display.PickActionEnemy(enemy);
+                    string result = Engine.PlayActionEnemy(action);
+                    while (result == "Fought" && action == "Attack")
+                    {
+                        Display.ShowHeroStat(Engine.Hero);
+                        action = Display.PickActionEnemy(enemy);
+                        result = Engine.PlayActionEnemy(action);
+                    }
+                    if (action == "Flee")
+                    {
+                        level.Enemies[creatureIndex - 1] = Engine.Enemy;
+                        db.UpdateEnemy(Engine.Enemy);
+                        continue;
+                    }
+                    // while result = fought -> else check enemy died or hero died
+                    if (result == "Enemy died")
+                    {
                         Display.KilledEnemy(Engine.Enemy);
                         Engine.EnemyKilled(creatureIndex);
-                        break;
-                    case "Hero died":
+                        continue;
+                    }
+                    else if (result == "Hero died")
+                    {
                         Display.EndScreen(Engine.Hero);
-                        break;
-                    case "Fought":
-                        break;
+                    }
+
                 }
+                    #endregion
             }
-            #endregion
+
         }
     }
 }
