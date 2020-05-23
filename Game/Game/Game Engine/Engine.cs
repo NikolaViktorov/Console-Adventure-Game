@@ -117,11 +117,11 @@ namespace Game.Game_Engine
             }
         }
 
-        internal void EnemyKilled(int enemyIndex)
+        internal void EnemyKilled(int enemyIndex, int levelIndex)
         {
             enemyIndex -= 1;
             this.Hero.Money += this.Enemy.MoneyReward;
-            Levels[0].Enemies.RemoveAt(enemyIndex);
+            Levels[levelIndex].Enemies.RemoveAt(enemyIndex);
             db.DeleteEnemy(this.Enemy);
         }
 

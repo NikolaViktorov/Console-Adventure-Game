@@ -31,6 +31,8 @@ namespace Game.Data.Models
 
         public string AttackEnemy(Enemy enemy)
         {
+            //this.Power = 10000;  hack
+            //this.Health = 10000; hack
             if (enemy.Health - this.Power <= 0)
             {
                 enemy.Health = 0;

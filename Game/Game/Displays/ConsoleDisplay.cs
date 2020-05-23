@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Game.Displays
@@ -62,6 +63,83 @@ namespace Game.Displays
             }
 
             return action;
+        }
+
+        internal void CompletedGame(Hero hero)
+        {
+            Console.WriteLine("Congratulations you won the game!");
+            ShowHeroStat(hero);
+            // 1600 500
+            Console.SetWindowSize(105, 20);
+
+            string phaseA = System.Environment.NewLine + "                               *                               " + System.Environment.NewLine +
+                "               *                             *       *'*'*       *              *       .----,         " + System.Environment.NewLine +
+                "    *                  }               *              |||||        .----.              /#    '\\       " + System.Environment.NewLine +
+                "          .--.        {                   )         @@.@.@.@@     /     \\  .          |      |        " + System.Environment.NewLine +
+                "         /    \\                       }             |'='='=|    |'='='='|             |#    |'.       " + System.Environment.NewLine +
+                "         |#   |                 *                  @@.@.@.@.@@    '._ _,/                '(^           " + System.Environment.NewLine +
+                "         \\_ _.'        *              *    )       |'='='='='|     (^              *       )          " + System.Environment.NewLine +
+                "          (^        *         .                    @@.@.@.@.@.@@     )          *           (          " + System.Environment.NewLine +
+                "           )                        _    ___  _____  ____    ___  __  __  _                            " + System.Environment.NewLine +
+                @"          (                 |   |  | |  |   | |   | |    |  |   \ \ \/ /  ||                          " + System.Environment.NewLine +
+                @"           )                \   /  | |  |      | |  | || |  | - /  \  /   ||                          " + System.Environment.NewLine +
+                @"                             \_/   |_|  |___|  |_|  |____|  |_._\  /_/    ()                          " + System.Environment.NewLine +
+                @"                                                                                                      ";
+
+            string phaseB = System.Environment.NewLine + "                               *                               " + System.Environment.NewLine +
+                "               *                             *        *'*'*      *              *       .----,         " + System.Environment.NewLine +
+                "    *                  }               *              |||||        .----.              /#    '\\       " + System.Environment.NewLine +
+                "          .--.        {                   )         @@.@.@.@@     /     \\  .          |      |        " + System.Environment.NewLine +
+                "         /    \\                       }             |'='='=|    |'='='='|             |#    |'.       " + System.Environment.NewLine +
+                "         |#   |                 *                   @@.@.@.@.@@   '._ _,/                '^)           " + System.Environment.NewLine +
+                "         \\_ _.'        *              *    )       |'='='='='|     ^)              *     (            " + System.Environment.NewLine +
+                "          ^)        *         .                    @@.@.@.@.@.@@    (          *          )            " + System.Environment.NewLine +
+                "          (                         _    ___  _____  ____    ___  __  __  _                            " + System.Environment.NewLine +
+                @"          )                 |   |  | |  |   | |   | |    |  |   \ \ \/ /  ||                          " + System.Environment.NewLine +
+                @"         (                  \   /  | |  |      | |  | || |  | - /  \  /   ||                          " + System.Environment.NewLine +
+                @"                             \_/   |_|  |___|  |_|  |____|  |_._\  /_/    ()                          " + System.Environment.NewLine +
+                @"                                                                                                      ";
+
+            string phaseC = System.Environment.NewLine + "                               *                              " + System.Environment.NewLine +
+                "               *                             *         *'*'*     *              *       .----,         " + System.Environment.NewLine +
+                "    *                  }               *              |||||        .----.              /#    '\\       " + System.Environment.NewLine +
+                "          .--.        {                   )         @@.@.@.@@     /     \\  .          |      |        " + System.Environment.NewLine +
+                "         /    \\                       }             |'='='=|    |'='='='|              |#    |'.      " + System.Environment.NewLine +
+                "         |#   |                 *                  @@.@.@.@.@@    '._ _,/                '(^           " + System.Environment.NewLine +
+                "         \\_ _.'        *              *    )       |'='='='='|     (^              *       )          " + System.Environment.NewLine +
+                "          (^        *         .                    @@.@.@.@.@.@@     )          *           (          " + System.Environment.NewLine +
+                "           )                        _    ___  _____  ____    ___  __  __  _                            " + System.Environment.NewLine +
+                @"          (                 |   |  | |  |   | |   | |    |  |   \ \ \/ /  ||                          " + System.Environment.NewLine +
+                @"           )                \   /  | |  |      | |  | || |  | - /  \  /   ||                          " + System.Environment.NewLine +
+                @"                             \_/   |_|  |___|  |_|  |____|  |_._\  /_/    ()                          " + System.Environment.NewLine +
+                @"                                                                                                      ";
+            Console.WriteLine();
+
+            while (true)
+            {
+                Console.WriteLine(phaseA);
+                Thread.Sleep(300);
+                Console.Clear();
+
+                Console.WriteLine(phaseB);
+                Thread.Sleep(300);
+                Console.Clear();
+
+                Console.WriteLine(phaseC);
+                Thread.Sleep(300);
+                Console.Clear();
+
+                Console.WriteLine(phaseB);
+                Thread.Sleep(300);
+                Console.Clear();
+            }
+
+
+        }
+
+        internal void NextLevel(Level level)
+        {
+            Console.WriteLine($"You finished the {level.Name}");
         }
 
         internal bool PickActionAdventurer(Adventurer adv)
@@ -154,7 +232,7 @@ namespace Game.Displays
                 return numberPicked;
             }
 
-            Console.WriteLine("Where do you want to go? (pick a number )");
+            Console.WriteLine("Where do you want to go? (pick a number)");
                 numberPicked = int.Parse(Console.ReadLine());
             while (numberPicked < 1 || numberPicked > 5)
             {

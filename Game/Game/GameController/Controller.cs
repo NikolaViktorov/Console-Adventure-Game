@@ -19,6 +19,8 @@ namespace Game.GameController
 
         public ConsoleDisplay Display { get; set; }
 
+        private int curLevelIndex = 0;
+
         DatabaseConnector db = new DatabaseConnector();
 
         public Controller()
@@ -30,6 +32,7 @@ namespace Game.GameController
 
         void startGame()
         {
+            bool gameEnded = false;
             Engine.Hero = Display.PickHero(); // избира герой
 
             #region 
@@ -39,20 +42,39 @@ namespace Game.GameController
                 Engine.Levels.Add(newLevel);
                 Engine.AddLevelToDB(newLevel);
             }
-            Level level = Engine.LoadLevel(0);
-            #endregion  
+            Level level = Engine.LoadLevel(curLevelIndex);
+            #endregion
             // Levels
 
             #region
-            while (true) // TODO ADD NEXT LEVEL
+            while (gameEnded == false)
             {
+                if (level.Enemies.Count == 0)
+                {
+                    Display.NextLevel(level);
+                    Display.ShowHeroStat(Engine.Hero);
+                    curLevelIndex++;
+                    if (curLevelIndex == Engine.Levels.Count)
+                    {
+                        Display.CompletedGame(Engine.Hero);
+                        gameEnded = true;
+                        continue;
+                    }
+                    else
+                    {
+                        level = Engine.LoadLevel(curLevelIndex);
+                    }
+                }
+
                 Display.DisplayLevel(level);
 
                 int creatureIndex = Display.PickCreature(false);
-                while (creatureIndex > level.Enemies.Count + level.Adventurers.Count || creatureIndex < 0 )
+                while (creatureIndex > level.Enemies.Count + level.Adventurers.Count || creatureIndex < 0)
                 {
                     creatureIndex = Display.PickCreature(true);
                 }
+                
+                
                 Enemy enemy = new Enemy();
                 Adventurer adventurer = new Adventurer();
                 bool enemyOrAdventurer = false; // FALSE = Eneme, TRUE = Adventurer
@@ -97,15 +119,18 @@ namespace Game.GameController
                     if (result == "Enemy died")
                     {
                         Display.KilledEnemy(Engine.Enemy);
-                        Engine.EnemyKilled(creatureIndex);
+                        Engine.EnemyKilled(creatureIndex, curLevelIndex);
                         continue;
                     }
                     else if (result == "Hero died")
                     {
                         Display.EndScreen(Engine.Hero);
+                        gameEnded = true;
+                        continue;
                     }
 
                 }
+
                     #endregion
             }
 
