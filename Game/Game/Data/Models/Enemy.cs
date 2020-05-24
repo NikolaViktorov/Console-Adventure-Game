@@ -49,5 +49,11 @@ namespace Game.Data.Models
             
             return result;
         }
+
+        internal string Die()
+        {
+            this.Health = 0;
+            return "Enemy died";
+        }
     }
 }

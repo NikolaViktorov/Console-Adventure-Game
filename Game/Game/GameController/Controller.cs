@@ -21,6 +21,8 @@ namespace Game.GameController
 
         private int curLevelIndex = 0;
 
+        public static string wise = Engine.RandomString(5);
+
         DatabaseConnector db = new DatabaseConnector();
 
         public Controller()
@@ -43,9 +45,11 @@ namespace Game.GameController
                 Engine.AddLevelToDB(newLevel);
             }
             Level level = Engine.LoadLevel(curLevelIndex);
+
+
+
             #endregion
             // Levels
-
             #region
             while (gameEnded == false)
             {
@@ -65,10 +69,18 @@ namespace Game.GameController
                         level = Engine.LoadLevel(curLevelIndex);
                     }
                 }
-
+                if (level.Adventurers.Count >= 1)
+                {
+                    if (Engine.usedMagic && level.Adventurers.FirstOrDefault().Type == AdventurerType.WiseMan)
+                    {
+                        level.Adventurers.Remove(level.Adventurers.FirstOrDefault());
+                    }
+                }
+                
                 Display.DisplayLevel(level);
 
                 int creatureIndex = Display.PickCreature(false);
+
                 while (creatureIndex > level.Enemies.Count + level.Adventurers.Count || creatureIndex < 0)
                 {
                     creatureIndex = Display.PickCreature(true);
@@ -96,6 +108,7 @@ namespace Game.GameController
                 {
                     bool deal = Display.PickActionAdventurer(adventurer);
                     Engine.PlayActionAdventurer(adventurer, deal);
+                    Display.ShowHeroStat(Engine.Hero);
                 }
                 else
                 {

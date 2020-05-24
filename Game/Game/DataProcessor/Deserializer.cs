@@ -1,20 +1,16 @@
-﻿using AutoMapper;
-using Game.Data;
-using Game.Data.Models;
-using Game.DataProcessor.ImportDTO;
-using Game.Displays;
-using Game.Game_Engine;
-using Game.GameController;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game.DataProcessor
+﻿namespace Game.DataProcessor
 {
+    using AutoMapper;
+    using Game.Data;
+    using Game.Data.Models;
+    using Game.DataProcessor.ImportDTO;
+    using Game.Displays;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
     public class Deserializer
     {
         private const string ErrorMessage = "Invalid data!";

@@ -56,7 +56,7 @@ namespace Game.Displays
             Console.WriteLine("2. Attack");
             // bribe TODO
             string action = Console.ReadLine();
-            while (action != "Attack" && action != "Flee")
+            while (action != "Attack" && action != "Flee" && action != Controller.wise)
             {
                 Console.WriteLine("Pick real action!");
                 action = Console.ReadLine();
@@ -139,7 +139,7 @@ namespace Game.Displays
 
         internal void NextLevel(Level level)
         {
-            Console.WriteLine($"You finished the {level.Name}");
+            Console.WriteLine($"You finished the {level.Name}!");
         }
 
         internal bool PickActionAdventurer(Adventurer adv)
@@ -147,49 +147,51 @@ namespace Game.Displays
             Console.WriteLine($"You met {adv.Type}!");
             bool deal = false;
             string answer = "";
-
-            switch (adv.Type)
+            do
             {
-                case AdventurerType.Elf:
-                    Console.WriteLine("The elf is a mythic creature, which has the power to double your power for the price of 100 Gold! Will you accept this great deal?");
-                    answer = Console.ReadLine();
-                    break;
-                case AdventurerType.Unicorn:
-                    Console.WriteLine("The unicorn is the friendliest creature you can find in this game! It will charge you nothing and will give you 40 HP. Will you accept this great deal?");
-                    answer = Console.ReadLine();
-                    break;
-                case AdventurerType.Merchant:
-                    Console.WriteLine("The merchant is a very clever and insidious person. He will trade you some items for a price. Here are the items you can choose from: "); // TODO ADD ITEMS
-                    answer = Console.ReadLine();
-                    break;
-                case AdventurerType.Doctor:
-                    Console.WriteLine("The doctor is ready to make you stronger by healing you by 50HP and giving you 20 power but for the cost of 5 % of your total gold. Will you accept this great deal?");
-                    answer = Console.ReadLine();
-                    break;
-                case AdventurerType.Ghost:
-                    Console.WriteLine(); // TODO
-                    answer = Console.ReadLine();
-                    break;
-                case AdventurerType.WiseMan:
-                    Console.WriteLine(); // TODO
-                    answer = Console.ReadLine(); 
-                    break;
-                case AdventurerType.Gnome:
-                    Console.WriteLine(); // TODO
-                    answer = Console.ReadLine();
-                    break;
-                default:
-                    break;
-            }
+                switch (adv.Type)
+                {
+                    case AdventurerType.Elf:
+                        Console.WriteLine("The elf is a mythic creature, which has the power to double your power for the price of 100 Gold! Will you accept this great deal? (Yes|No)");
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.Unicorn:
+                        Console.WriteLine("The unicorn is the friendliest creature you can find in this game! It will charge you nothing and will give you 40 HP. Will you accept this great deal? (Yes|No)");
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.Merchant:
+                        Console.WriteLine("The merchant is a very clever and insidious person. He will trade you some items for a price. Here are the items you can choose from: "); // TODO ADD ITEMS
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.Doctor:
+                        Console.WriteLine("The doctor is ready to make you stronger by healing you by 50HP and giving you 20 power but for the cost of 20 % of your total gold. Will you accept this great deal? (Yes|No)");
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.Ghost:
+                        Console.WriteLine(); // TODO
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.WiseMan:
+                        Console.WriteLine("This old and wise man has the secret to very strong magic spell. This spell can be used only 1 time and it will kill an enemy in 1 shot. The key to this magic is 200 gold. Will you accept this great deal? (Yes|No)"); // TODO
+                        answer = Console.ReadLine();
+                        break;
+                    case AdventurerType.Gnome:
+                        Console.WriteLine("The gnome is a very cunning. He can tell you a secret code to a mystery room, if you wish to accept the deal you will get the code which you can use in the dungeon to go to the mystery room. In the secret room there may be good things waiting for you like gold or items, but if you get unlucky you will get a curse. Your choice is wheter to believe him or not. It will cost you 150 gold. Will you accept this great deal? (Yes|No)"); // TODO
+                        answer = Console.ReadLine();
+                        break;
+                    default:
+                        break;
+                }
+            } while (answer != "Yes" && answer != "No");
 
             deal = CheckAnswer(answer);
 
             return deal;
-        }
+        }  // TODO
         
         private bool CheckAnswer(string answer)
         {
-            if (answer == "Deal")
+            if (answer == "Yes")
             {
                 return true;
             }
@@ -224,23 +226,32 @@ namespace Game.Displays
 
         public int PickCreature(bool failed)
         {
-            int numberPicked = 0;
-            if (failed)
+            try
             {
-                Console.WriteLine("Please pick a number that exists in the current level!");
+                int numberPicked = 0;
+                if (failed)
+                {
+                    Console.WriteLine("Please pick a number that exists in the current level!");
+                    numberPicked = int.Parse(Console.ReadLine());
+                    return numberPicked;
+                }
+
+                Console.WriteLine("Where do you want to go? (pick a number)");
                 numberPicked = int.Parse(Console.ReadLine());
+                while (numberPicked < 1 || numberPicked > 5)
+                {
+                    Console.WriteLine("You entered a wrong move! Please, enter a number between 1 and 5");
+                    numberPicked = int.Parse(Console.ReadLine());
+                }
+
                 return numberPicked;
             }
-
-            Console.WriteLine("Where do you want to go? (pick a number)");
-                numberPicked = int.Parse(Console.ReadLine());
-            while (numberPicked < 1 || numberPicked > 5)
+            catch (FormatException ex)
             {
-                Console.WriteLine("You entered a wrong move! Please, enter a number between 1 and 5");
-                numberPicked = int.Parse(Console.ReadLine());
+                PickCreature(true);
+                return -1;
             }
             
-            return numberPicked;
         }
     }
 

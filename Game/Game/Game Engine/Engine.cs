@@ -1,6 +1,7 @@
 ﻿using Game.Data;
 using Game.Data.CustomNames;
 using Game.Data.Models;
+using Game.GameController;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace Game.Game_Engine
 {
     public class Engine
     {
-        private Random random = new Random();
         public Hero Hero { get; set; }
 
         public Enemy Enemy { get; set; }
@@ -19,12 +19,25 @@ namespace Game.Game_Engine
 
         DatabaseConnector db = new DatabaseConnector();
 
+        private Random rnd = new Random();
+
         private int currLevelIndex;
+            
+        internal bool usedMagic = false;
 
         public Engine()
         {
             Levels = new List<Level>();
         }
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public Level MakeLevel()
         {
             Level level = new Level();
@@ -45,7 +58,7 @@ namespace Game.Game_Engine
             int randomIndex = random.Next(1, endIndex);
             for (int i = 0; i < count; i++)
             {
-                RandomAdventureres.Add(allAdventureres[randomIndex]);
+                RandomAdventureres.Add(allAdventureres[randomIndex]); // randomIndex gnome = 0 wise = 1
                 randomIndex = random.Next(1, endIndex);
             }
 
@@ -73,8 +86,14 @@ namespace Game.Game_Engine
                     return Hero.AttackEnemy(Enemy);
                 case "Flee":
                     return ";";
-             }
-            return "";
+                default:
+                    if (!usedMagic)
+                    {
+                        usedMagic = true;
+                        return Enemy.Die();
+                    }
+                    return ";";
+            }
         }
 
         internal void PlayActionAdventurer(Adventurer adv, bool deal)
@@ -100,7 +119,7 @@ namespace Game.Game_Engine
                     case AdventurerType.Merchant:
                         break;
                     case AdventurerType.Doctor:
-                        int neededMoney = Hero.Money * 5 / 100;
+                        int neededMoney = Hero.Money * 20 / 100;
                         Hero.Money -= neededMoney;
                         Hero.Health += 50;
                         Hero.Power += 20;
@@ -108,8 +127,52 @@ namespace Game.Game_Engine
                     case AdventurerType.Ghost:
                         break;
                     case AdventurerType.WiseMan:
-                        break;
+                        if (Hero.Money < 200)
+                        {
+                            Console.WriteLine("You do not have enough money, maybe try killing some enemies firsst!");
+                        }
+                        else
+                        {
+                            Hero.Money -= 200;
+                            Console.WriteLine($"The magic spell is: {Controller.wise}");
+                        }
+                            break;
                     case AdventurerType.Gnome:
+                        if (Hero.Money < 150)
+                        {
+                            Console.WriteLine("You do not have enough money, maybe try killing some enemies firsst!");
+                        }
+                        else
+                        {
+                            Hero.Money -= 150;
+                            bool goodOrBad = rnd.Next(101) < 75; // 75% good, 25% bad ADJUST
+                            if (goodOrBad)
+                            {
+                                bool hpOrPower = rnd.Next(3) == 1; // true = hp / false = power
+                                Console.WriteLine("You got lucky! Your stats got boosted!");
+                                if (hpOrPower)
+                                {
+                                    Hero.Health += 70;
+                                }
+                                else
+                                {
+                                    Hero.Power += 35;
+                                }
+                            }
+                            else
+                            {
+                                int cursePower = rnd.Next(25);
+                                Console.WriteLine($"Oh, no! You got cursed and lost {cursePower} power!");
+                                if (Hero.Power <= cursePower)
+                                {
+                                    Hero.Power = 1;
+                                }
+                                else
+                                {
+                                    Hero.Power -= cursePower;
+                                }
+                            }
+                        }
                         break;
                     default:
                         break;
