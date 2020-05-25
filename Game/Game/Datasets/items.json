@@ -2,6 +2,7 @@
   {
     "Name": "Sword",
     "UpgradeValue": 80,
+    "Price": 130,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -9,6 +10,7 @@
   {
     "Name": "Magic wand",
     "UpgradeValue": 250,
+    "Price": 400,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -16,6 +18,7 @@
   {
     "Name": "Pistol",
     "UpgradeValue": 130,
+    "Price": 240,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -23,6 +26,7 @@
   {
     "Name": "Nunchaku",
     "UpgradeValue": 160,
+    "Price": 300,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -30,6 +34,7 @@
   {
     "Name": "Cannon",
     "UpgradeValue": 65,
+    "Price": 110,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -37,6 +42,7 @@
   {
     "Name": "Axe",
     "UpgradeValue": 70,
+    "Price": 120,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -44,6 +50,7 @@
   {
     "Name": "Holy Lance",
     "UpgradeValue": 80,
+    "Price": 150,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -51,6 +58,7 @@
   {
     "Name": "Armor",
     "UpgradeValue": 100,
+    "Price": 250,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Health"
@@ -58,6 +66,7 @@
   {
     "Name": "Health potion",
     "UpgradeValue": 50,
+    "Price": 80,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Health"
@@ -65,6 +74,7 @@
   {
     "Name": "Herbs",
     "UpgradeValue": 10,
+    "Price": 20,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -72,6 +82,7 @@
   {
     "Name": "Food",
     "UpgradeValue": 25,
+    "Price": 35,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Power"
@@ -79,6 +90,7 @@
   {
     "Name": "Money purse",
     "UpgradeValue": 200,
+    "Price": 50,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Money"
@@ -86,6 +98,7 @@
   {
     "Name": "Gold",
     "UpgradeValue": 400,
+    "Price": 100,
     "HeroId": 1,
     "EnemyId": 8,
     "Type": "Money"
@@ -93,6 +106,7 @@
   {
     "Name": "Silver",
     "UpgradeValue": 300,
+    "Price": 75,
     "HeroId": 1,
     "EnemyId": 1,
     "Type": "Money"

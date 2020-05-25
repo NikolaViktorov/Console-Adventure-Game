@@ -106,8 +106,24 @@ namespace Game.GameController
                 
                 if (enemyOrAdventurer) // adv == true | enemy = false
                 {
-                    bool deal = Display.PickActionAdventurer(adventurer);
-                    Engine.PlayActionAdventurer(adventurer, deal);
+                    string answer = "";
+                    bool deal = false;
+                    if (adventurer.Type == AdventurerType.Merchant)
+                    {
+                        Item[] items = Engine.PickFourItems().ToArray();
+                        answer = Display.PickActionAdventurer(adventurer, items);
+                        if (int.Parse(answer) <= items.Length && int.Parse(answer) > 0)
+                        {
+                            deal = true;
+                            Engine.PlayActionAdventurer(adventurer, deal, int.Parse(answer));
+                        }
+                    }
+                    else
+                    {
+                        answer = Display.PickActionAdventurer(adventurer);
+                        deal = Display.CheckAnswer(answer);
+                        Engine.PlayActionAdventurer(adventurer, deal);
+                    }
                     Display.ShowHeroStat(Engine.Hero);
                 }
                 else

@@ -54,7 +54,6 @@ namespace Game.Displays
             Console.WriteLine("Pick what you want to do! (Attack | Flee)");
             Console.WriteLine("1. Flee");
             Console.WriteLine("2. Attack");
-            // bribe TODO
             string action = Console.ReadLine();
             while (action != "Attack" && action != "Flee" && action != Controller.wise)
             {
@@ -142,10 +141,9 @@ namespace Game.Displays
             Console.WriteLine($"You finished the {level.Name}!");
         }
 
-        internal bool PickActionAdventurer(Adventurer adv)
+        internal string PickActionAdventurer(Adventurer adv, params Item[] items)
         {
             Console.WriteLine($"You met {adv.Type}!");
-            bool deal = false;
             string answer = "";
             do
             {
@@ -160,7 +158,14 @@ namespace Game.Displays
                         answer = Console.ReadLine();
                         break;
                     case AdventurerType.Merchant:
-                        Console.WriteLine("The merchant is a very clever and insidious person. He will trade you some items for a price. Here are the items you can choose from: "); // TODO ADD ITEMS
+                        Console.WriteLine("The merchant is a very clever and insidious person. He will trade you some items for a price. Here are the items you can choose from: (Write the number of the item)");
+
+                        for (int i = 0; i < items.Length; i++)
+                        {
+                            Console.WriteLine($"    {i + 1}. {items[i]}");
+                        }
+                        Console.WriteLine($"    {items.Length + 1}. Exit");
+
                         answer = Console.ReadLine();
                         break;
                     case AdventurerType.Doctor:
@@ -168,28 +173,27 @@ namespace Game.Displays
                         answer = Console.ReadLine();
                         break;
                     case AdventurerType.Ghost:
-                        Console.WriteLine(); // TODO
+                        Console.WriteLine("The ghost is a very tricky creature. If you have enough gold, you can give it to him and he will haunt you, doubling your power! He needs only 125 gold. Will you accept this great deal? (Yes|No)");
                         answer = Console.ReadLine();
                         break;
                     case AdventurerType.WiseMan:
-                        Console.WriteLine("This old and wise man has the secret to very strong magic spell. This spell can be used only 1 time and it will kill an enemy in 1 shot. The key to this magic is 200 gold. Will you accept this great deal? (Yes|No)"); // TODO
+                        Console.WriteLine("This old and wise man has the secret to very strong magic spell. This spell can be used only 1 time and it will kill an enemy in 1 shot. The key to this magic is 200 gold. Will you accept this great deal? (Yes|No)"); // 
+
                         answer = Console.ReadLine();
                         break;
                     case AdventurerType.Gnome:
-                        Console.WriteLine("The gnome is a very cunning. He can tell you a secret code to a mystery room, if you wish to accept the deal you will get the code which you can use in the dungeon to go to the mystery room. In the secret room there may be good things waiting for you like gold or items, but if you get unlucky you will get a curse. Your choice is wheter to believe him or not. It will cost you 150 gold. Will you accept this great deal? (Yes|No)"); // TODO
+                        Console.WriteLine("The gnome is a very cunning. He can tell you a secret code to a mystery room, if you wish to accept the deal you will get the code which you can use in the dungeon to go to the mystery room. In the secret room there may be good things waiting for you like gold or items, but if you get unlucky you will get a curse. Your choice is wheter to believe him or not. It will cost you 150 gold. Will you accept this great deal? (Yes|No)");
                         answer = Console.ReadLine();
                         break;
                     default:
                         break;
                 }
-            } while (answer != "Yes" && answer != "No");
+            } while (answer != "Yes" && answer != "No" && int.Parse(answer) < 0 && int.Parse(answer) > items.Length + 1);
 
-            deal = CheckAnswer(answer);
-
-            return deal;
-        }  // TODO
+            return answer;
+        } 
         
-        private bool CheckAnswer(string answer)
+        public bool CheckAnswer(string answer)
         {
             if (answer == "Yes")
             {
@@ -209,6 +213,11 @@ namespace Game.Displays
         internal void DisplayLevel(Level level)
         {
             Console.WriteLine(level);
+        }
+
+        private void DisplayItemMerchant()
+        {
+
         }
 
         internal void KilledEnemy(Enemy enemy)

@@ -16,6 +16,9 @@ namespace Game.DataProcessor.ImportDTO
         [Required]
         public int UpgradeValue { get; set; }
 
+        [Required]
+        public int Price { get; set; }
+
         public int HeroId { get; set; }
 
         public int EnemyId { get; set; }

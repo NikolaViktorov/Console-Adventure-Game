@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Game.Data.Models
 {
@@ -50,8 +52,18 @@ namespace Game.Data.Models
 
         public override string ToString()
         {
-            string result = $"{this.Type} with {Health} HP, {Power} DMG and {Money} Gold!";
-            return result;
+            StringBuilder result = new StringBuilder();
+                result.Append($"{this.Type} with {Health} HP, {Power} DMG and {Money} Gold!");
+            if (this.Items.Count > 0)
+            {
+                result.AppendLine(Environment.NewLine + $"With {Items.Count} items: ");
+                foreach (var item in Items)
+                {
+                    result.AppendLine($"    {item}");
+                }
+            }
+            
+            return result.ToString();
         }
     }
 }

@@ -18,6 +18,9 @@ namespace Game.Data.Models
         [Required]
         public int UpgradeValue { get; set; }
 
+        [Required]
+        public int Price { get; set; }
+
         public int HeroId { get; set; }
 
         public Hero Hero { get; set; }
@@ -31,7 +34,7 @@ namespace Game.Data.Models
 
         public override string ToString()
         {
-            return $"{Name}: {Type} | {UpgradeValue}";
+            return $"{Name}: {Type} | {UpgradeValue} | {Price} $";
         }
     }
 }
